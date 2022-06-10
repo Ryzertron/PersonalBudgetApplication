@@ -16,7 +16,13 @@ class ScreenHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(bottomNavigationBar: const BottomNavigatorWidget(),
+    return Scaffold(
+      backgroundColor: Color.fromARGB(255, 230, 230, 230),
+      appBar: AppBar(
+        title: Text('FinAssist'),
+        centerTitle: true,
+      ),
+      bottomNavigationBar: const BottomNavigatorWidget(),
       body: SafeArea(
         child: ValueListenableBuilder(
             valueListenable: selectedindex,
@@ -24,6 +30,9 @@ class ScreenHome extends StatelessWidget {
               return _pages[updatedindex];
             }),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        if(selectedindex.value==0){}else{}
+      },child: Icon(Icons.add)),
     );
   }
 }
