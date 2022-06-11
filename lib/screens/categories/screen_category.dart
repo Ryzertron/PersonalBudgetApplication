@@ -27,7 +27,7 @@ class _ScreenCategoryState extends State<ScreenCategory>
           labelColor: Colors.black,
           unselectedLabelColor: Colors.grey,
           controller: _tabcontroller,
-          tabs: [
+          tabs: const [
           Tab(
             text: 'Income',
           ),

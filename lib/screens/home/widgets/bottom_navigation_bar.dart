@@ -15,10 +15,10 @@ class BottomNavigatorWidget extends StatelessWidget {
             onTap: (newIndex) {
               ScreenHome.selectedindex.value = newIndex;
             },
-            items: [
-              BottomNavigationBarItem(
+            items: const [
+               BottomNavigationBarItem(
                   icon: Icon(Icons.currency_exchange), label: 'Transactions'),
-              BottomNavigationBarItem(
+               BottomNavigationBarItem(
                   icon: Icon(Icons.category), label: 'Categories')
             ]);
       },

@@ -2,9 +2,6 @@ import 'package:budget/screens/categories/screen_category.dart';
 import 'package:budget/screens/home/widgets/bottom_navigation_bar.dart';
 import 'package:budget/screens/transactions/screen_transaction.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 class ScreenHome extends StatelessWidget {
   ScreenHome({Key? key}) : super(key: key);
 
@@ -17,9 +14,9 @@ class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 230, 230, 230),
+      backgroundColor: const Color.fromARGB(255, 230, 230, 230),
       appBar: AppBar(
-        title: Text('FinAssist'),
+        title: const Text('FinAssist'),
         centerTitle: true,
       ),
       bottomNavigationBar: const BottomNavigatorWidget(),
@@ -32,7 +29,7 @@ class ScreenHome extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(onPressed: (){
         if(selectedindex.value==0){}else{}
-      },child: Icon(Icons.add)),
+      },child: const Icon(Icons.add)),
     );
   }
 }
