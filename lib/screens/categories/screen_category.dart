@@ -1,3 +1,4 @@
+import 'package:budget/db/category/category_db.dart';
 import 'package:budget/screens/categories/expense_category_list.dart';
 import 'package:budget/screens/categories/income_category_list.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _ScreenCategoryState extends State<ScreenCategory>
   @override
   void initState() {
     _tabcontroller = TabController(vsync: this, length: 2);
+    CategoryDB().refresh();
     super.initState();
   }
 
@@ -28,22 +30,20 @@ class _ScreenCategoryState extends State<ScreenCategory>
           unselectedLabelColor: Colors.grey,
           controller: _tabcontroller,
           tabs: const [
-          Tab(
-            text: 'Income',
-          ),
-          Tab(
-            text: 'Expense',
-          ),
-        ],),
+            Tab(
+              text: 'Income',
+            ),
+            Tab(
+              text: 'Expense',
+            ),
+          ],
+        ),
         Expanded(
           child: TabBarView(
             controller: _tabcontroller,
-            children: const [
-            IncomeList(),
-            ExpenseList()
-          ],),
+            children: const [IncomeList(), ExpenseList()],
+          ),
         )
-        
       ],
     );
   }

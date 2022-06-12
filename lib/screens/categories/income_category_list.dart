@@ -1,3 +1,5 @@
+import 'package:budget/db/category/category_db.dart';
+import 'package:budget/models/categories/model_category.dart';
 import 'package:flutter/material.dart';
 
 class IncomeList extends StatelessWidget {
@@ -5,25 +7,33 @@ class IncomeList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      itemBuilder: (ctx, index) {
-        return Card(
-          child: ListTile(
-            title: Text('Income $index'),
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.delete),
-              color: Colors.red,
-            ),
-          ),
+    return ValueListenableBuilder(
+      valueListenable: CategoryDB().incomeCategoryList,
+      builder: (BuildContext ctx, List<CategoryModel> newList, Widget? _) {
+        return ListView.separated(
+          itemBuilder: (ctx, index) {
+            final category = newList[index];
+            return Card(
+              child: ListTile(
+                title: Text(category.name),
+                trailing: IconButton(
+                  onPressed: () {
+                    CategoryDB().deletecategory(category.id);
+                  },
+                  icon: const Icon(Icons.delete),
+                  color: Colors.red,
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (ctx, index) {
+            return const SizedBox(
+              height: 10,
+            );
+          },
+          itemCount: newList.length,
         );
       },
-      separatorBuilder: (ctx, index) {
-        return const SizedBox(
-          height: 10,
-        );
-      },
-      itemCount: 10,
     );
   }
 }

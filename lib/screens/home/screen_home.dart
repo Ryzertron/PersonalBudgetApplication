@@ -1,7 +1,9 @@
+import 'package:budget/screens/categories/category_add_popup.dart';
 import 'package:budget/screens/categories/screen_category.dart';
 import 'package:budget/screens/home/widgets/bottom_navigation_bar.dart';
 import 'package:budget/screens/transactions/screen_transaction.dart';
 import 'package:flutter/material.dart';
+
 class ScreenHome extends StatelessWidget {
   ScreenHome({Key? key}) : super(key: key);
 
@@ -27,9 +29,14 @@ class ScreenHome extends StatelessWidget {
               return _pages[updatedindex];
             }),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        if(selectedindex.value==0){}else{}
-      },child: const Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (selectedindex.value == 0) {
+            } else {
+              showCategoryAdd(context);
+            }
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }
