@@ -1,3 +1,7 @@
+import 'package:budget/db/category/category_db.dart';
+import 'package:budget/db/transactions/transaction_db.dart';
+import 'package:budget/models/categories/model_category.dart';
+import 'package:budget/models/transactions/transaction_add_model.dart';
 import 'package:flutter/material.dart';
 
 class ScreenTransaction extends StatelessWidget {
@@ -5,25 +9,47 @@ class ScreenTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-         padding: EdgeInsets.all(10),
-        itemBuilder: (context, index) {
-          return Card(
-            elevation: 0,
-            child: ListTile(
-              leading: CircleAvatar(
-                radius: 50,
-                child: Text('12 Dec')),
-              title: Text('10000'),
-              subtitle: Text('Travel'),
-            ),
-          );
-        },
-        separatorBuilder: (ctx, index) {
-          return const SizedBox(
-            height: 10,
-          );
-        },
-        itemCount: 10);
+    TransactionDB.instance.refresh();
+    CategoryDB.instance.refresh();
+    return ValueListenableBuilder(
+        valueListenable: TransactionDB.instance.transactionNotifier,
+        builder: (BuildContext ctx, List<TransactionModel> newlist, Widget? _) {
+          return ListView.separated(
+              padding: const EdgeInsets.all(10),
+              itemBuilder: (context, index) {
+                final value = newlist[index];
+                return Card(
+                  elevation: 0,
+                  child: ListTile(
+                    leading:
+                        Text('${value.date.toString().characters.take(10)}'),
+                    title: Text(
+                      '₹.${value.amount}',
+                      style: TextStyle(
+                          color: typeCheck(value.transactiontype),
+                          fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(value.transactionmodel.name),
+                  ),
+                );
+              },
+              separatorBuilder: (ctx, index) {
+                return const SizedBox(
+                  height: 10,
+                );
+              },
+              itemCount: newlist.length);
+        });
+  }
+
+  Color? typeCheck(CategoryType type) {
+    if (type == CategoryType.income) {
+      return Colors.green;
+    }
+    if (type == CategoryType.expense) {
+      return Colors.red;
+    } else {
+      return null;
+    }
   }
 }

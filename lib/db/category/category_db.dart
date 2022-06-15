@@ -4,6 +4,7 @@ import 'package:budget/models/categories/model_category.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 
+// ignore: constant_identifier_names
 const CATEGORY_DB_NAME = 'category-DB';
 
 abstract class CategoryDbFunctions {

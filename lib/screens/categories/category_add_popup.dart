@@ -6,7 +6,7 @@ ValueNotifier<CategoryType> selectedCategory =
     ValueNotifier(CategoryType.income);
 
 showCategoryAdd(BuildContext context) async {
-  final _categorycontroller = TextEditingController();
+  final categorycontroller = TextEditingController();
   showDialog(
     context: context,
     builder: (ctx) {
@@ -16,7 +16,7 @@ showCategoryAdd(BuildContext context) async {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              controller: _categorycontroller,
+              controller: categorycontroller,
               decoration: const InputDecoration(hintText: 'Category Name'),
             ),
           ),
@@ -33,7 +33,7 @@ showCategoryAdd(BuildContext context) async {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                final name = _categorycontroller.text.trim();
+                final name = categorycontroller.text.trim();
                 if (name.isEmpty) {
                   return;
                 }
